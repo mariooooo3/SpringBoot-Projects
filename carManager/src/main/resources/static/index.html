@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Manager</title>
+</head>
+<body>
+
+<h1>Cars</h1>
+
+<button onclick="loadCars()">Load Cars</button>
+
+<ul id="carList"></ul>
+
+<script>
+    function loadCars() {
+        fetch('http://localhost:8080/cars')
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('carList');
+                list.innerHTML = '';
+
+                data.forEach(car => {
+                    const li = document.createElement('li');
+                    li.textContent = car.brand + " " + car.model + " - " + car.price + "$";
+                    list.appendChild(li);
+                });
+            });
+    }
+</script>
+
+</body>
+</html>
